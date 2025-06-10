@@ -30,35 +30,45 @@ def openurl(url):
 #get xpaths from notepad
 def xpaths(name,paths):
     f=open(f"{name}.txt","r")
-    raw_xpaths=list(f.read().split("\n"))
+    raw_xpaths=f.read().split("\n")
     f.close()
-    b=[i.split(":")[1] for i in raw_xpaths]
+    b=[i.split(": ")[1] for i in raw_xpaths]
     return(b[paths])
 
 
 #login instagram
-def login(usern,passw):
-    time.sleep(1)
+def login(s="usermane",usern="username",passw="password",key="sessionid"):
+    time.sleep(2)
     
-    #write username
-    driver.find_element(By.XPATH,xpaths("i-xpath",0)).send_keys(usern)
+    if s=="username":
+        #write username
+        driver.find_element(By.XPATH,xpaths("i-xpath",0)).send_keys(usern)
+        time.sleep(1)
+        #write password
+        driver.find_element(By.XPATH,xpaths("i-xpath",1)).send_keys(passw)
+        time.sleep(1)
     
-    #write password
-    driver.find_element(By.XPATH,xpaths("i-xpath",1)).send_keys(passw)
-    time.sleep(1)
+        #click login button
+        driver.find_element(By.XPATH,xpaths("i-xpath",2)).click()
+        time.sleep(8)
+        print("Logged in with using username & password")
+        
+    #using sessionid to bypass login progress
+    else:
 
-    #click login button
-    driver.find_element(By.XPATH,xpaths("i-xpath",2)).click()
-    time.sleep(10)
-
-    print("Logged in")
+        #set cookie
+        driver.add_cookie({"name": "sessionid", "domain":".instagram.com", "value": key})
+        driver.refresh()
+        time.sleep(5)
+        print("Logged in with using sessionid")
     
     driver.get("https://www.instagram.com")
     time.sleep(8)
     
     #click notification decline
-    driver.find_element(By.XPATH,xpaths("i-xpath",3)).click()
-    time.sleep(2)
+    #driver.find_element(By.XPATH,xpaths("i-xpath",3)).click()
+    #time.sleep(2)
+
 
 #share photo in instagram 
 def share_photo(text,photo_url,usern):
@@ -85,7 +95,7 @@ def share_photo(text,photo_url,usern):
     
     #share actions
     driver.find_element(By.XPATH,xpaths("i-xpath",6)).click()
-    time.sleep(15)
+    time.sleep(10)
 
     print("Post Shared")
 
