@@ -1,0 +1,13 @@
+0-Sing in Button: /html/body/div[1]/div/div/div/div/div/nav/div/div/div[2]/button[2]
+1-Hosting Button: /html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/div/div/div/div/div[1]/button
+2-Custom Radio: /html/body/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div/div/div[2]/div/div[2]
+3-Server: /html/body/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div/div/div[3]/div[2]/input
+4-Done Button: /html/body/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div/div/div[5]/button
+5-Email: /html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/div/div/div/div/div[2]/div[2]/div[1]/input
+6-Password: /html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/div/div/div/div/div[2]/div[2]/div[2]/input
+7-Next Button: /html/body/div[1]/div/div/div/div/div/div/div/div/div[2]/div/div/div/div/div[3]/button[2]
+8-New Post Button: /html/body/div[1]/div/div/div/div/div/nav/div[2]/button
+9-Upload Button: /html/body/div[1]/div/div/div/div/div/div[2]/div/div/div/div[4]/div[1]/button[1]
+10-Upload Photo: /html/body/input
+11-Write Caption: /html/body/div[1]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div[2]/div/div
+12-Post Caption: /html/body/div[1]/div/div/div/div/div/div[2]/div/div/div/div[1]/div/button[2]
