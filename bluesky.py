@@ -82,15 +82,12 @@ def login(s="usermane",host="host‬",usrn="username",passw="password",key="sess
         
     #using sessionid to bypass login progress
     else:
-        """
-        this part is not available
-        
-        #set cookies
-        driver.add_cookie({"name": "sessionid", "domain":"bsky.app", "value": key})
+
+        #set local storage key and value
+        driver.execute_script(f"localStorage.setItem('BSKY_STORAGE', '{key}');")
         driver.refresh()
         time.sleep(5)
         print("Logged in with using sessionid")
-        """
 
 
 #share post (with pic or without)
