@@ -39,48 +39,80 @@ def xpaths(name,paths):
 
 
 #login webpage
-def login(usrn,passw):
+def login(s="usermane",usrn="username",passw="password",key="sessionid",key1="sessionid1"):
     
-    #write username
-    driver.find_element(By.XPATH,xpaths("f-xpath",0)).send_keys(usrn)
-    time.sleep(0.3)
     
-    #write password 
-    driver.find_element(By.XPATH,xpaths("f-xpath",1)).send_keys(passw)
-    time.sleep(0.3)
-    
-    #click login button
-    driver.find_element(By.XPATH,xpaths("f-xpath",2)).click()
-    time.sleep(1)
+    if s=="username":
 
-    print("Logged in")
+        #write username
+        driver.find_element(By.XPATH,xpaths("f-xpath",0)).send_keys(usrn)
+        time.sleep(0.3)
+        
+        #write password 
+        driver.find_element(By.XPATH,xpaths("f-xpath",1)).send_keys(passw)
+        time.sleep(0.3)
+        
+        #click login button
+        driver.find_element(By.XPATH,xpaths("f-xpath",2)).click()
+        time.sleep(10)
+        
+        #decline notifications
+        driver.find_element(By.XPATH,xpaths("f-xpath",3)).click()
+        time.sleep(2)
+    
+        print("Logged in with using username & password")
+        
+    #using sessionid to bypass login progress
+    else:
+
+        #set cookies
+        driver.add_cookie({"name": "c_user", "domain":".facebook.com", "value": key})
+        driver.add_cookie({"name": "xs", "domain":".facebook.com", "value": key1})
+        driver.refresh()
+        time.sleep(5)
+        print("Logged in with using sessionid") 
 
 
 #share post (with pic or without)
-def share_post(text,photo_url="None"):
+def share_post(text,photo_url="none"):
 
     print("Start Sharing")
     
+    try:
+        #decline notifications
+        driver.find_element(By.XPATH,xpaths("f-xpath",3)).click()
+        time.sleep(2)
+    except:
+        None
+    
     #share post button click
-    driver.find_element(By.XPATH,xpaths("f-xpath",3)).click()
+    driver.find_element(By.XPATH,xpaths("f-xpath",4)).click()
     time.sleep(20)
 
     #if you choose photo+text mode active this section
-    if photo_url!="None":
+    if photo_url!="none":
 
-        #open drop img section
-        driver.find_element(By.XPATH,xpaths("f-xpath",4)).click()
-        time.sleep(1)
+        try:
+            
+            #upload img
+            driver.find_element(By.XPATH,xpaths("f-xpath",6)).send_keys(photo_url)
+            time.sleep(2)
 
-        #upload img
-        driver.find_element(By.XPATH,xpaths("f-xpath",5)).send_keys(photo_url)
-        time.sleep(2)
+        except:
+            
+            #open drop img section
+            driver.find_element(By.XPATH,xpaths("f-xpath",5)).click()
+            time.sleep(2)
+            
+            #upload img
+            driver.find_element(By.XPATH,xpaths("f-xpath",6)).send_keys(photo_url)
+            time.sleep(2)
 
     #write text
-    driver.find_element(By.XPATH,xpaths("f-xpath",6)).send_keys(text)
+    driver.find_element(By.XPATH,xpaths("f-xpath",7)).send_keys(text)
     time.sleep(1)
     
     #click share button
-    driver.find_element(By.XPATH,xpaths("f-xpath",7)).click()
+    driver.find_element(By.XPATH,xpaths("f-xpath",8)).click()
     
     print("Post Shared")
