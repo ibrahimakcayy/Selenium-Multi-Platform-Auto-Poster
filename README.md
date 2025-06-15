@@ -26,14 +26,6 @@ This tool is perfect for developers, marketers, or content creators who want to 
 
 ---
 
-## 📂 File Structure
-
-Place all of the following files in the **same folder**:
-
-Each `.txt` file should contain the text or content you want to post on that platform.
-
----
-
 ## 🛠 Installation
 
 ### 1. Install Required Library
