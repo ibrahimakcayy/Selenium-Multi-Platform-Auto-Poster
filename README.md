@@ -1,15 +1,42 @@
-# selenium-twitter-instagram-facebook-threads-bluesky
-# Python Selenium auto post share in Twitter, Instagram, Facebook, Threads, Bluesky
+# 🚀 Selenium Multi-Platform Auto Poster
 
-share post in multiple platforms (Twitter, Instagram, Facebook, Threads, Bluesky)
+Automate your social media posts across **Twitter (X)**, **Instagram**, **Facebook**, **Threads**, and **Bluesky** using Python and Selenium.
 
-required libraries selenium, time
+This tool is perfect for developers, marketers, or content creators who want to save time by sharing the same post on multiple platforms with a single command.
 
+---
+
+## 📸 Supported Platforms
+
+- 🐦 Twitter (X)  
+- 📷 Instagram  
+- 👥 Facebook  
+- 🧵 Threads  
+- ☁️ Bluesky
+
+---
+
+## ⚙️ Features
+
+- 🔁 **Multi-platform posting** from one script
+- 🧠 Smart automation with **Selenium WebDriver**
+- 💬 Supports **session-based login** (excluding Threads)
+- ⚡ Fast and configurable for different devices or layouts
+- 📝 Easy customization via `.txt` files
+
+---
+
+## 📂 File Structure
+
+Place all of the following files in the **same folder**:
+
+Each `.txt` file should contain the text or content you want to post on that platform.
+
+---
+
+## 🛠 Installation
+
+### 1. Install Required Library
+
+```bash
 pip install selenium
-
-chrome webdriver
-
-All txt's must be in same folder with main.py
-
-you can use sessionid to login(threads is not included)
-xpaths and times migth be change on differnt devices. It can be changeable. 
