@@ -1,4 +1,4 @@
-# Selenium Multi-Platform Auto Poster
+# 💻 Selenium Multi-Platform Auto Poster
 
 Automate your social media posts across **Twitter (X)**, **Instagram**, **Facebook**, **Threads**, and **Bluesky** using Python and Selenium.
 
