@@ -11,7 +11,7 @@ This tool is perfect for developers, marketers, or content creators who want to 
 - Twitter (X)  
 - Instagram  
 - Facebook  
-- Threads  
+- Threads  (This is not the full version)
 - Bluesky
 
 ---
