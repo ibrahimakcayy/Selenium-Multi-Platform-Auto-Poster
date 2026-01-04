@@ -1,3 +1,6 @@
+## ⚠️ Legal Disclaimer
+This tool is developed for **educational and research purposes only**. Using automated scripts to interact with social media platforms may violate their Terms of Service (ToS). The user is solely responsible for any account restrictions, bans, or legal consequences resulting from the use of this tool. The developer assumes no liability.
+
 # 💻 Selenium Multi-Platform Auto Poster
 
 Automate your social media posts across **Twitter (X)**, **Instagram**, **Facebook**, **Threads**, and **Bluesky** using Python and Selenium.
