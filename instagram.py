@@ -1,10 +1,7 @@
-#import all libraries
-from selenium.webdriver import ActionChains
-from selenium import webdriver as web
-import time
-from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.wait import WebDriverWait
+import time
 
 #useless
 def cont():
@@ -19,83 +16,86 @@ def drivers(driv):
 
 
 #open url and max window
-def openurl(url): 
+def openurl(url, opt="none"): 
+    #Headless option (it is background process)
+    options = webdriver.ChromeOptions()
+    #headless option is not workinng on instagram
+    if opt=="headless":
+        print("Headless mode activated")
+        options.add_argument("--headless")
+    driver = webdriver.Chrome(options=options)
+    
     driver.get(url)
-    driver.maximize_window()
-    time.sleep(1.5)
-
+    driver.set_window_size(1300, 650)
+    
+    #wait until email input is displayed
+    wait = WebDriverWait(driver, timeout=2)
+    wait.until(lambda _ : driver.find_element(By.CSS_SELECTOR, '[name="email"]').is_displayed())
     print("Webpage opened")
-
-
-#get xpaths from notepad
-def xpaths(name,paths):
-    f=open(f"{name}.txt","r")
-    raw_xpaths=f.read().split("\n")
-    f.close()
-    b=[i.split(": ")[1] for i in raw_xpaths]
-    return(b[paths])
 
 
 #login instagram
 def login(s="usermane",usern="username",passw="password",key="sessionid"):
-    time.sleep(2)
     
     if s=="username":
         #write username
-        driver.find_element(By.XPATH,xpaths("i-xpath",0)).send_keys(usern)
-        time.sleep(1)
+        driver.find_element(By.CSS_SELECTOR, '[name="email"]').send_keys(usern)
+        
         #write password
-        driver.find_element(By.XPATH,xpaths("i-xpath",1)).send_keys(passw)
-        time.sleep(1)
+        driver.find_element(By.CSS_SELECTOR, '[name="pass"]').send_keys(passw)
     
         #click login button
-        driver.find_element(By.XPATH,xpaths("i-xpath",2)).click()
-        time.sleep(8)
+        driver.find_element(By.CSS_SELECTOR, '[id="login_form"] [role="button"] [role="none"]').click()
+        
+        
         print("Logged in with using username & password")
         
     #using sessionid to bypass login progress
     else:
 
         #set cookie
-        driver.add_cookie({"name": "sessionid", "domain":".instagram.com", "value": key})
-        driver.refresh()
-        time.sleep(5)
+        driver.add_cookie({"name": "sessionid", "value": key})
+
         print("Logged in with using sessionid")
-    
-    driver.get("https://www.instagram.com")
-    time.sleep(8)
-    
+        
     #click notification decline
-    #driver.find_element(By.XPATH,xpaths("i-xpath",3)).click()
+    #driver.find_element(By.CSS_SELECTOR,'[role=dialog] button:nth-child(2)').click()
     #time.sleep(2)
+    
+    driver.get(f"https://www.instagram.com/{usern}/")
 
 
-#share photo in instagram 
+#share photo in instagram wait options in not working on instagram (bot error)
 def share_photo(text,photo_url,usern):
     
     print("Start Sharing")
 
     #open create popup
-    driver.find_element(By.XPATH,xpaths("i-xpath",4)).click()
-    time.sleep(3)
+    wait = WebDriverWait(driver, timeout=10)
+    wait.until(lambda _ : driver.find_element(By.CSS_SELECTOR, '[data-visualcompletion="ignore-dynamic"] > div > div > div:nth-child(2) > div > div:nth-child(6)').is_displayed())
+    driver.find_element(By.CSS_SELECTOR, '[data-visualcompletion="ignore-dynamic"] > div > div > div:nth-child(2) > div > div:nth-child(6)').click()
     
     #upload photo
-    driver.find_element(By.XPATH,xpaths("i-xpath",5)).send_keys(photo_url)
-    time.sleep(5)
-    
-    #share actions
-    driver.find_element(By.XPATH,xpaths("i-xpath",6)).click()
-    time.sleep(2)
-    driver.find_element(By.XPATH,xpaths("i-xpath",6)).click()
+    #wait.until(lambda _ : driver.find_element(By.CSS_SELECTOR, 'svg[viewBox="0 0 97.6 77.3"]').is_displayed())
     time.sleep(3)
+    driver.find_element(By.CSS_SELECTOR, '[role="presentation"] input[type="file"]').send_keys(photo_url)
+
+    
+    #share action
+    #wait.until(lambda _ : driver.find_element(By.CSS_SELECTOR, 'section > div > div > div > div:nth-child(3) > button').is_displayed())
+    time.sleep(2)
+    driver.find_element(By.CSS_SELECTOR, 'section > div > div > div > div:nth-child(3) > button').click()
+
     
     #write caption
-    driver.find_element(By.XPATH,xpaths("i-xpath",7)).send_keys(text)
-    time.sleep(0.5)
+    #wait.until(lambda _ : driver.find_element(By.CSS_SELECTOR, 'textarea').is_displayed())
+    time.sleep(2)
+    driver.find_element(By.CSS_SELECTOR, 'textarea').send_keys(text)
     
-    #share actions
-    driver.find_element(By.XPATH,xpaths("i-xpath",6)).click()
-    time.sleep(10)
+    #share action
+    #wait.until(lambda _ : driver.find_element(By.CSS_SELECTOR, 'section > div > div > div > div:nth-child(3) > button').is_displayed())
+    time.sleep(2)
+    driver.find_element(By.CSS_SELECTOR, 'section > div > div > div > div:nth-child(3) > button').click()
 
     print("Post Shared")
 
