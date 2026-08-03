@@ -19,7 +19,7 @@ def drivers(driv):
 def openurl(url, opt="none"): 
     #Headless option (it is background process)
     options = webdriver.ChromeOptions()
-    #headless option is not workinng on instagram
+    #headless option
     if opt=="headless":
         print("Headless mode activated")
         options.add_argument("--headless")
@@ -65,7 +65,7 @@ def login(s="usermane",usern="username",passw="password",key="sessionid"):
     driver.get(f"https://www.instagram.com/{usern}/")
 
 
-#share photo in instagram wait options in not working on instagram (bot error)
+#share photo in instagram wait options in not working on instagram (bot error) idk why
 def share_photo(text,photo_url,usern):
     
     print("Start Sharing")
